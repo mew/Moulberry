@@ -7,11 +7,14 @@ switch(Colour.RED) {
     case(Colour.BLACK) {
         println("nope")
     }
-    case("string", "uu") {
+    case(Color.PINK, Color.MAGENTA) {
         println("keep going")
     }
-    case(Colour(0xff0000)) {
+    case(Colour(0xff0000), fallthrough = true) {
         println("There we go! :)")
+    }
+    case(Colour.YELLOW, fallthrough = false) {
+        println("this will run regardless because fallthrough :)")
     }
     default {
         println("default statement")
