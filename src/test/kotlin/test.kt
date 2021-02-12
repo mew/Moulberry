@@ -1,13 +1,13 @@
+
 import zone.nora.moulberry.Colour
 import zone.nora.moulberry.switch
-import java.awt.Color
 
 fun main() {
     switch(Colour.RED) {
         case(Colour.BLACK) {
             println("nope")
         }
-        case(Color.PINK, Color.MAGENTA) {
+        case(Colour.PINK, Colour.MAGENTA) {
             println("keep going")
         }
         case(Colour(0xff0000), fallthrough = true) {

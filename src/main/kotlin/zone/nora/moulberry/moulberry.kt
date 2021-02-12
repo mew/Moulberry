@@ -1,6 +1,6 @@
 package zone.nora.moulberry
 
-fun <T> switch(value: T, switch: Switch<T>.() -> Switch<T>): Unit = switch.invoke(Switch()).runSwitch(value)
+fun <T> switch(value: T, build: Switch<T>.() -> Switch<T>): Unit = Switch<T>().build().run(value)
 
 class Switch<T> {
     private val cases: MutableList<Case<T>> = mutableListOf()
@@ -14,18 +14,18 @@ class Switch<T> {
         defaultMethod = method
     }
 
-    internal fun runSwitch(value: T) {
+    internal fun run(value: T) {
         var fallthrough = false
         cases.forEach {
             if (it.values.contains(value) && !fallthrough) {
-                it.method.invoke()
+                it.method()
                 if (it.fallthrough) {
                     fallthrough = true
                 } else {
                     return
                 }
             } else if (fallthrough) {
-                it.method.invoke()
+                it.method()
                 if (!it.fallthrough) {
                     return
                 }
